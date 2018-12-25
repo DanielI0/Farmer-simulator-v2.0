@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Farmer simulator</string>
+    <string name="difficulty">The level of difficulty</string>
+    <string name="status1">Money</string>>
+    <string name="status2">Income</string>
+    <string name="status3">Age</string>
+</resources>
