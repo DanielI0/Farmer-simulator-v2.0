@@ -10,26 +10,54 @@ import android.widget.TextView;
 import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
+    //private int FIELD = 1;
     String s = getApplicationContext().getFilesDir()+"SaveFromQuest.sfq";
+    static Modules core = new Modules();
+    @Override
+    protected void onPause() {
+        super.onPause();
+        core.save();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final Modules m = new Modules(s);
-        Button b = (Button)findViewById(R.id.button);
-        TextView fromFile = (TextView)findViewById(R.id.text);
-        fromFile.setText(m.loadProgress().toString());
-        b.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                Intent set = new Intent(MainActivity.this,Settings.class);
-                startActivity(set);
+        core = core.load();
 
-            }
-        });
+
+
+
+
+
     }
 
+    public void toShop(android.view.View v){
+        Intent i =new Intent(MainActivity.this,ShopActivity.class);
+
+        startActivity(i);
+
+    }
+    public void setField(android.view.View view){
+        TextView field = (TextView)findViewById(R.id.Field);
+        switch (view.getId()){
+            case(R.id.farm):
+
+                field.setText(core.toString());
+
+                break;
+            case(R.id.ach):
+                field.setText(
+                        "Uncompleted:\n"
+                        +core.checkUnAch()+
+                        "Completed:\n"+
+                        core.checkComplAch()
+                );
+                break;
+
+        }
+    }
 
 
 

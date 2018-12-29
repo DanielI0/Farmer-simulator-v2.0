@@ -3,64 +3,68 @@ package com.example.danie.kbect;
 import android.support.annotation.RequiresPermission;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
-public class Modules {
-    final int K=10;
-    private int koeff = K;
-    static char[] data = {'1',' ','2',' ','P'};
+public class Modules implements Serializable {
+    static final int KEY = 12819;
+    long s = 10;//m^2
+    long money = 1000;
+    short mastership = 1;
 
-    FileOutputStream put;
-    FileInputStream get;
-    public Modules(String s){
-        try {
-            FileOutputStream put = new FileOutputStream(s);
-            FileInputStream get = new FileInputStream(s);
-            this.get = get;
-            this.put = put;
-        }catch (FileNotFoundException e){
+
+    @Override
+    public String toString() {
+        return "Area: "+s+"\nMoney: "+money+"\nMastership level: "+mastership+"\n";
+    }
+    public static Modules load(){
+        try{
+            FileInputStream in = new FileInputStream("savFromSim.ld");
+            ObjectInputStream ois = new ObjectInputStream(in);
+            return (Modules) ois.readObject();
+        }catch (IOException e){
+
+        }catch (ClassNotFoundException e){
 
         }
+        return null;
     }
-    private void switchReplic(){
+    public void save(){
+        try{
+            FileOutputStream out = new FileOutputStream("savFromSim.ld");
+            ObjectOutputStream oos = new ObjectOutputStream(out);
+            oos.writeObject(this);
+            oos.close();
 
-    }
-    protected void saveProgress(){
-
-    }
-    protected char[] loadProgress(){
-        decode();
-        char[] lll = data.clone();
-        codify();
-        return lll;
-    }
-    private void decode(){
-        for(int i=0; i<100;i++){
-            try {
-                data[i]=(char)get.read();
-                data[i]-=10;
-                koeff^=data[i];
-                data[i]=(char)koeff;
-                koeff = K;
-            }catch (IOException e){
-                Log.d("SSSs","IO");
-            }
+        }catch (IOException e){
+            e.printStackTrace();
         }
     }
-    private void codify(){
-        for(int i=0;i<100;i++){
-            data[i]^=koeff;
-            data[i]+=10;
-            try {
-                put.write(data[i]);
-            }catch (IOException e){
-
-            }
-        }
+    void buyS(){
+        s+=1000;
+        money-=100000;
     }
+    void upMasterShipLVL(){
+        mastership+=1;
+        money-=1000;
+    }
+    String checkUnAch(){
+        return (money<1000000000 ? "   Become dollar billioner\n":"")+(s<150000000 ? "  Seize The Earth":"");
+    }
+    String checkComplAch(){
+        return (money>=1000000000 ? "   Become dollar billioner\n":"")+(s>=150000000 ? "  Seize The Earth":"");
+    }
+
+
+
 }
