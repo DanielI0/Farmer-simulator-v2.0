@@ -44,6 +44,13 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if(core.load()!=null){  core = core.load();}
+        else {
+            core.clearProgress();
+            core.save();
+
+        }
         ActivityCompat.requestPermissions(MainActivity.this,
                 new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                 1);
@@ -56,8 +63,7 @@ public class MainActivity extends AppCompatActivity {
                 ((TextView)findViewById(R.id.Field)).invalidate();
             }
         };
-        if(core.load()!=null){  core = core.load();}
-                else core.save();
+
 
 
         final TextView field = (TextView)findViewById(R.id.Field);

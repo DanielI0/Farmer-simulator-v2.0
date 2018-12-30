@@ -86,7 +86,7 @@ public class Modules  extends AppCompatActivity
 
         }catch (IOException e){
             e.printStackTrace();
-            money = 1000000000;
+           // money = 1000000000;
         }
     }
 
