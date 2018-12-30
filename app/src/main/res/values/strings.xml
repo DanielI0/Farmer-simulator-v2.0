@@ -2,11 +2,12 @@
 
     <string name="app_name">Farmer simulator</string>
     <string name="difficulty">The level of difficulty</string>
-    <string name="achievments">Achievments</string>
+    <string name="achievments">Achievements</string>
     <string name="farm">Farm</string>
     <string name="shop">Shop</string>
     <string name="status1">Money</string>>
     <string name="status2">Income</string>
     <string name="status3">Age</string>
-
+    <string name="action1">Buy area (Costs 100.000$ for 5000m^2)</string>
+    <string name="action2">Up mastership level (Costs 1000000$ for one level)</string>
 </resources>

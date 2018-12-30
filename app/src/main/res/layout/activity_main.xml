@@ -5,9 +5,12 @@
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#E8D3C1"
+
 
     tools:context=".MainActivity"
     tools:layout_editor_absoluteY="81dp">
+
 
     <Button
         android:id="@+id/button"
@@ -30,7 +33,6 @@
         android:layout_width="122dp"
         android:layout_height="60dp"
 
-        android:layout_marginEnd="3dp"
         android:onClick="toShop"
         android:text="@string/shop"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -44,7 +46,9 @@
         android:onClick="setField"
         android:text="@string/farm"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/shop" />
+        app:layout_constraintEnd_toStartOf="@+id/shop"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/ach" />
 
     <Button
         android:id="@+id/ach"

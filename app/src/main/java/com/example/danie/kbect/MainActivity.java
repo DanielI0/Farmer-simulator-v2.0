@@ -1,6 +1,10 @@
 package com.example.danie.kbect;
 
 import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,7 +15,8 @@ import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
     //private int FIELD = 1;
-    String s = getApplicationContext().getFilesDir()+"SaveFromQuest.sfq";
+   Handler handler;
+    //TextView field = (TextView)findViewById(R.id.Field);
     static Modules core = new Modules();
     @Override
     protected void onPause() {
@@ -20,17 +25,42 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onDestroy() {
+        core.save();
+        super.onDestroy();
+
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+         handler = new Handler() {   // создание хэндлера
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                ((TextView)findViewById(R.id.Field)).setText((String)msg.obj);
+                ((TextView)findViewById(R.id.Field)).invalidate();
+            }
+        };
+        if(core.load()!=null){  core = core.load();}
+                else core.save();
 
-        core = core.load();
 
+        final TextView field = (TextView)findViewById(R.id.Field);
 
+            realiseIncome a = new realiseIncome(field);
+            a.execute();
 
+            field.setText(core.toString());
 
+    }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        TextView field = (TextView)findViewById(R.id.Field);
+        field.setText(core.toString());
     }
 
     public void toShop(android.view.View v){
@@ -58,7 +88,39 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
+class realiseIncome extends AsyncTask<Void,Void,Void>{
+    TextView field;
 
+    public realiseIncome(TextView field){
+        this.field = field;
+    }
+
+    @Override
+    protected Void doInBackground(Void... voids) {
+        int a = 1;
+
+        while(a==1){
+
+            try {
+                core.raiseMoney();
+                Message msg = Message.obtain();
+                msg.obj = core.toString();
+                msg.setTarget(handler);
+                msg.sendToTarget();
+
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }catch (RuntimeException e){
+                e.printStackTrace();
+
+            }
+        }
+        return null;
+    }
+
+
+}
 
 
 }

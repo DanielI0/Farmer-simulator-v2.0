@@ -11,7 +11,12 @@ public class Settings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings);
     }
-
+    public void clearProgress(android.view.View v) {
+        MainActivity.core.clearProgress(v);
+    }
+    public void changeDifficulty(android.view.View view){
+        MainActivity.core.changeDifficulty(view);
+    }
     @Override
     protected void onStart() {
         super.onStart();
