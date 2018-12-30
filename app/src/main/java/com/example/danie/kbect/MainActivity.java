@@ -16,6 +16,7 @@ import java.io.File;
 public class MainActivity extends AppCompatActivity {
     //private int FIELD = 1;
    Handler handler;
+    realiseIncome a;
     //TextView field = (TextView)findViewById(R.id.Field);
     static Modules core = new Modules();
     @Override
@@ -49,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
         final TextView field = (TextView)findViewById(R.id.Field);
 
-            realiseIncome a = new realiseIncome(field);
+            a = new realiseIncome(field);
             a.execute();
 
             field.setText(core.toString());
@@ -72,18 +73,15 @@ public class MainActivity extends AppCompatActivity {
     public void setField(android.view.View view){
         TextView field = (TextView)findViewById(R.id.Field);
         switch (view.getId()){
-            case(R.id.farm):
 
-                field.setText(core.toString());
-
-                break;
             case(R.id.ach):
-                field.setText(
-                        "Uncompleted:\n"
-                        +core.checkUnAch()+
-                        "Completed:\n"+
-                        core.checkComplAch()
-                );
+
+                Intent ach = new Intent(MainActivity.this,Achievements.class);
+                startActivity(ach);
+                break;
+            case(R.id.button):
+                Intent set = new Intent(MainActivity.this,Settings.class);
+                startActivity(set);
                 break;
 
         }

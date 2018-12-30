@@ -20,13 +20,21 @@ public class ShopActivity extends AppCompatActivity {
         s.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.core.buyS(getApplicationContext());
+                if(MainActivity.core.buyS(getApplicationContext())){
+                    Toast.makeText(ShopActivity.this,"Not enough money",Toast.LENGTH_LONG).show();
+                }else{
+                    Toast.makeText(ShopActivity.this,"Successfully",Toast.LENGTH_LONG).show();
+                }
             }
         });
         l.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.core.upMasterShipLVL();
+                if(MainActivity.core.upMasterShipLVL()){
+                    Toast.makeText(ShopActivity.this,"Not enough money",Toast.LENGTH_LONG).show();
+                }else{
+                    Toast.makeText(ShopActivity.this,"Successfully",Toast.LENGTH_LONG).show();
+                }
             }
         });
     }

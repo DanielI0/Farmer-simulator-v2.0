@@ -18,26 +18,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/txtS"
-        android:layout_width="match_parent"
-        android:layout_height="71dp"
-        android:text="TextView" />
-
     <Button
         android:id="@+id/upSeedLVL"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Button"
+        android:text="@string/action2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/txtSeed"
-        android:layout_width="match_parent"
-        android:layout_height="71dp"
-        android:text="TextView" />
 
 </LinearLayout>
